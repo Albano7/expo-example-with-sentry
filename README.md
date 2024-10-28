@@ -3,6 +3,7 @@
 
 ## Descripción
 Este proyecto es una aplicación móvil desarrollada con React Native utilizando Expo como framework de desarrollo y Sentry para el monitoreo y seguimiento de errores en tiempo real.
+Pueden ver el video de ejemplo con el siguiente enlace [SentryVideo](https://drive.google.com/file/d/1-48Pf5ZVacnhjQr6Z9Ciy6O-3O6H_Jgs/view?usp=sharing)
 
 ## Requisitos Previos
 - Node.js (versión 16.0 o superior)
