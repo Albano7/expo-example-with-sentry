@@ -1,17 +1,21 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import * as Sentry from '@sentry/react-native';
+import { StatusBar, View } from 'react-native';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+Sentry.init({
+  dsn: 'https://bfd7810c72a45febdb9aa12c6f5b30df@o4508201441361920.ingest.us.sentry.io/4508201441558528',
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // enableSpotlight: __DEV__,
+});
+
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+const RootLayout = () => {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -27,11 +31,17 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <View style={{ flex: 1 }}>
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={"white"}
+      />
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(views)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-    </ThemeProvider>
+    </View>
   );
 }
+
+export default Sentry.wrap(RootLayout);

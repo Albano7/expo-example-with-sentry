@@ -1,50 +1,116 @@
-# Welcome to your Expo app 👋
+# App Test with Sentry
+## Aplicación React Native con Expo y Sentry
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Descripción
+Este proyecto es una aplicación móvil desarrollada con React Native utilizando Expo como framework de desarrollo y Sentry para el monitoreo y seguimiento de errores en tiempo real.
 
-## Get started
+## Requisitos Previos
+- Node.js (versión 16.0 o superior)
+- npm (versión 8.0 o superior)
+- Expo CLI
+- Cuenta en Sentry (https://sentry.io)
 
-1. Install dependencies
+## Instalación
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Configuración del Entorno
+Primero, asegúrate de tener instalado Node.js y npm. Luego, instala Expo CLI globalmente:
 
 ```bash
-npm run reset-project
+npm install -g expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Clonar el Repositorio
+```bash
+git clone git@github.com:Albano7/expo-example-with-sentry.git
+cd expo-example-with-sentry
+```
 
-## Learn more
+### 3. Instalar Dependencias
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 4. Configuración de Sentry
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Crear un proyecto en Sentry:
+   - Ve a [Sentry](https://sentry.io)
+   - Crea una nueva organización o utiliza una existente
+   - Crea un nuevo proyecto seleccionando "React-Native"
 
-## Join the community
+2. Configurar las credenciales de Sentry:
+   - Crea un archivo `.env.local` en la raíz del proyecto
+   - Agrega las siguientes variables:
+     ```
+     SENTRY_AUTH_TOKEN=tu-dsn-de-sentry
+     ```
 
-Join our community of developers creating universal apps.
+3. Inicializar Sentry en el proyecto:
+```bash
+npx sentry-wizard -i reactNative
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Ejecución del Proyecto
+
+### Desarrollo
+1. Iniciar el servidor de desarrollo:
+```bash
+npx expo start
+```
+
+2. Opciones de ejecución:
+   - Presiona `i` para abrir en iOS Simulator
+   - Presiona `a` para abrir en Android Emulator
+   - Escanea el código QR con la app Expo Go en tu dispositivo físico
+
+### Producción
+1. Generar el bundle de la aplicación:
+```bash
+# Para Android
+eas build -p android
+
+# Para iOS
+eas build -p ios
+```
+
+
+## Scripts Disponibles
+- `npm start`: Inicia el servidor de desarrollo de Expo
+- `npm run android`: Inicia la aplicación en el emulador de Android
+- `npm run ios`: Inicia la aplicación en el simulador de iOS
+- `npm run web`: Inicia la aplicación en el navegador web
+- `npm run test`: Ejecuta las pruebas unitarias
+
+## Monitoreo con Sentry
+
+### Prueba de Integración
+Para verificar que Sentry está funcionando:
+
+```javascript
+// En cualquier archivo .ts/.tsx
+Sentry.captureException(new Error('Test Error'));
+```
+
+
+## Comandos de Despliegue
+
+### Generar una Nueva Versión
+```bash
+# Incremento de versión patch
+npm version patch
+
+# Incremento de versión minor
+npm version minor
+
+# Incremento de versión major
+npm version major
+```
+
+### Construir para Producción
+```bash
+# Android
+eas build --platform android --profile production
+
+# iOS
+eas build --platform ios --profile production
+```
+
